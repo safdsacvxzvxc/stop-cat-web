@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "135583477847",
+    "project_id": "stop-it-meow-ranking",
+    "storage_bucket": "stop-it-meow-ranking.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135583477847:android:8d3c24fd327fa365dfb312",
+        "android_client_info": {
+          "package_name": "com.stopitmeow.stopcat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcG-vgp-v1v_AQ69UfdT4syGwMJmqsNsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
