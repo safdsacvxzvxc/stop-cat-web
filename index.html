@@ -15,7 +15,11 @@
       <canvas id="unity-canvas" width="540" height="960" tabindex="-1"></canvas>
 
       <section id="title-overlay" aria-label="게임 타이틀">
-        <img id="title-artwork" src="TemplateData/title-hero.png" alt="연금술 공방에서 포션을 든 연금술사와 고양이">
+        <video id="title-artwork" autoplay muted loop playsinline preload="auto"
+               poster="TemplateData/title-hero.png"
+               aria-label="연금술 공방에서 포션을 든 연금술사와 고양이 애니메이션">
+          <source src="StreamingAssets/title-intro.mp4?v=20260808-title-loop" type="video/mp4">
+        </video>
         <div id="title-scrim" aria-hidden="true"></div>
         <img id="title-logo" src="TemplateData/game-logo.png" alt="그만해 야옹아!">
         <div id="title-action">
