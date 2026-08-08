@@ -1,6 +1,6 @@
 :root {
   color-scheme: dark;
-  background: #0e1518;
+  background: #100a07;
 }
 
 * {
@@ -14,15 +14,19 @@ body {
   margin: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 20%, rgba(62, 226, 195, 0.12), transparent 36%),
-    #0e1518;
+    radial-gradient(circle at 50% 18%, rgba(255, 205, 115, 0.14), transparent 34%),
+    #100a07;
 }
 
 body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Arial, sans-serif;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+
+button {
+  font: inherit;
 }
 
 #unity-container {
@@ -33,49 +37,175 @@ body {
   height: min(100dvh, calc(100vw * 16 / 9));
   aspect-ratio: 9 / 16;
   overflow: hidden;
-  background: #1F1F20;
-  box-shadow: 0 0 48px rgba(0, 0, 0, 0.48);
+  background: #1f1712;
+  box-shadow: 0 0 52px rgba(0, 0, 0, 0.56);
 }
 
 #unity-canvas {
   display: block;
   width: 100%;
   height: 100%;
-  background: #1F1F20;
+  background: #1f1712;
   touch-action: none;
+}
+
+#title-overlay {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  overflow: hidden;
+  background: #3c1f10;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 360ms ease, visibility 360ms ease;
+}
+
+#title-overlay.is-hidden {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#title-artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+#title-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(37, 15, 6, 0.2) 0%, rgba(37, 15, 6, 0.04) 32%, rgba(37, 15, 6, 0.16) 58%, rgba(23, 9, 5, 0.86) 100%),
+    radial-gradient(circle at 50% 24%, transparent 20%, rgba(25, 9, 3, 0.2) 100%);
+}
+
+#title-logo {
+  position: absolute;
+  z-index: 2;
+  top: 1.8%;
+  left: 6%;
+  width: 88%;
+  height: 30%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 3px rgba(42, 18, 4, 0.72));
+}
+
+#title-action {
+  position: absolute;
+  z-index: 3;
+  right: 7%;
+  bottom: max(3.6%, env(safe-area-inset-bottom));
+  left: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 17px 18px 14px;
+  border: 1px solid rgba(255, 225, 163, 0.54);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(65, 34, 22, 0.88), rgba(33, 17, 12, 0.94));
+  box-shadow: 0 12px 38px rgba(24, 8, 3, 0.5), inset 0 1px rgba(255, 244, 219, 0.18);
+  backdrop-filter: blur(5px);
+}
+
+#title-tagline,
+#title-meta {
+  margin: 0;
+  text-align: center;
+}
+
+#title-tagline {
+  color: #fff4d8;
+  font-size: clamp(15px, 3.4vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+#title-meta {
+  color: #b6f2dc;
+  font-size: clamp(10px, 2.25vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#title-start {
+  width: min(100%, 380px);
+  min-height: 58px;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 244, 211, 0.78);
+  border-radius: 18px;
+  color: #213a31;
+  background: linear-gradient(180deg, #c9ffec 0%, #76e0bd 100%);
+  box-shadow: 0 5px 0 #3a8f75, 0 10px 22px rgba(4, 21, 15, 0.38), inset 0 2px rgba(255, 255, 255, 0.64);
+  cursor: pointer;
+  font-size: clamp(20px, 4.5vw, 29px);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+#title-start:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #3a8f75, 0 5px 14px rgba(4, 21, 15, 0.34), inset 0 2px rgba(255, 255, 255, 0.64);
+}
+
+#title-start:focus-visible {
+  outline: 3px solid #fff3a9;
+  outline-offset: 4px;
+}
+
+#title-start:disabled {
+  color: rgba(35, 47, 42, 0.72);
+  background: linear-gradient(180deg, #b7c9c2, #7b968d);
+  box-shadow: 0 4px 0 #4f625b;
+  cursor: wait;
 }
 
 #unity-loading-bar {
   position: absolute;
-  inset: 0;
+  z-index: 12;
+  right: 13%;
+  bottom: 17%;
+  left: 13%;
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: rgba(14, 21, 24, 0.92);
+  gap: 7px;
+  pointer-events: none;
 }
 
-#unity-logo {
-  width: 154px;
-  height: 130px;
-  background: url('unity-logo-dark.png') no-repeat center;
+#unity-loading-label {
+  color: #fff0cb;
+  font-size: clamp(11px, 2.5vw, 15px);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #unity-progress-bar-empty {
-  width: 141px;
-  height: 18px;
-  margin-top: 12px;
-  background: url('progress-bar-empty-dark.png') no-repeat center;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 231, 177, 0.72);
+  border-radius: 999px;
+  background: rgba(28, 14, 9, 0.76);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #unity-progress-bar-full {
   width: 0;
-  height: 18px;
-  background: url('progress-bar-full-dark.png') no-repeat center;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #60d8b1, #c8ffe9);
+  transition: width 100ms linear;
 }
 
 #unity-fullscreen-button {
   position: absolute;
+  z-index: 5;
   right: max(10px, env(safe-area-inset-right));
   bottom: max(10px, env(safe-area-inset-bottom));
   width: 38px;
@@ -84,12 +214,12 @@ body {
   border: 0;
   border-radius: 9px;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.48) url('fullscreen-button.png') no-repeat center;
+  background: rgba(0, 0, 0, 0.48) url("fullscreen-button.png") no-repeat center;
 }
 
 #unity-warning {
   position: absolute;
-  z-index: 3;
+  z-index: 20;
   top: max(12px, env(safe-area-inset-top));
   left: 50%;
   display: none;
@@ -113,5 +243,12 @@ body {
 @media (max-width: 600px) {
   #unity-container {
     box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #title-overlay,
+  #unity-progress-bar-full {
+    transition: none;
   }
 }
