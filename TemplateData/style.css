@@ -86,11 +86,13 @@ button {
 #title-logo {
   position: absolute;
   z-index: 2;
-  top: 1.8%;
-  left: 6%;
-  width: 88%;
-  height: 30%;
+  top: max(2%, env(safe-area-inset-top));
+  right: 2.5%;
+  left: auto;
+  width: 50%;
+  height: 22%;
   object-fit: contain;
+  object-position: 100% 0%;
   filter: drop-shadow(0 8px 3px rgba(42, 18, 4, 0.72));
 }
 
