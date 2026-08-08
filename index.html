@@ -58,12 +58,13 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL.loader.js";
+      var buildVersion = "20260808-stage-endless";
+      var loaderUrl = buildUrl + "/WebGL.loader.js?v=" + buildVersion;
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/WebGL.data.unityweb",
-        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
-        codeUrl: buildUrl + "/WebGL.wasm.unityweb",
+        dataUrl: buildUrl + "/WebGL.data.unityweb?v=" + buildVersion,
+        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb?v=" + buildVersion,
+        codeUrl: buildUrl + "/WebGL.wasm.unityweb?v=" + buildVersion,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Mori Game Studio",
         productName: "그만해 야옹아!",
