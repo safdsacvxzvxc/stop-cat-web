@@ -4,24 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="theme-color" content="#170d08">
+    <meta name="description" content="포션을 연결하고 합성하며 말썽꾸러기 고양이를 피하는 HTML5 캐주얼 액션 퍼즐 게임">
     <title>그만해 야옹아!</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <main id="unity-container">
+    <main id="unity-container" aria-label="그만해 야옹아! 게임">
       <canvas id="unity-canvas" width="540" height="960" tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
+
+      <section id="title-overlay" aria-label="게임 타이틀">
+        <img id="title-artwork" src="TemplateData/title-hero.png" alt="연금술 공방에서 포션을 든 연금술사와 고양이">
+        <div id="title-scrim" aria-hidden="true"></div>
+        <img id="title-logo" src="TemplateData/game-logo.png" alt="그만해 야옹아!">
+        <div id="title-action">
+          <p id="title-tagline">한 손으로 즐기는 포션 대소동</p>
+          <button id="title-start" type="button" disabled>게임 불러오는 중...</button>
+          <p id="title-meta">HTML5 · 캐주얼 액션 퍼즐</p>
+        </div>
+      </section>
+
+      <div id="unity-loading-bar" aria-live="polite">
+        <div id="unity-loading-label">게임 데이터 준비 중</div>
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div id="unity-warning"></div>
+      <div id="unity-warning" aria-live="assertive"></div>
       <button id="unity-fullscreen-button" type="button" aria-label="전체 화면"></button>
     </main>
+
     <script>
       var canvas = document.querySelector("#unity-canvas");
+      var titleOverlay = document.querySelector("#title-overlay");
+      var startButton = document.querySelector("#title-start");
+      var unityInstance = null;
 
       function unityShowBanner(msg, type) {
         var warningBanner = document.querySelector("#unity-warning");
@@ -47,9 +65,9 @@
         frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
         codeUrl: buildUrl + "/WebGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "Stop It Meow Studio",
+        companyName: "Mori Game Studio",
         productName: "그만해 야옹아!",
-        productVersion: "0.1.0",
+        productVersion: "1.0.0-contest",
         showBanner: unityShowBanner
       };
 
@@ -60,16 +78,33 @@
       script.onload = function () {
         createUnityInstance(canvas, config, function (progress) {
           document.querySelector("#unity-progress-bar-full").style.width = (100 * progress) + "%";
-        }).then(function (unityInstance) {
+        }).then(function (instance) {
+          unityInstance = instance;
           document.querySelector("#unity-loading-bar").style.display = "none";
+          startButton.disabled = false;
+          startButton.textContent = "게임 시작";
+
           document.querySelector("#unity-fullscreen-button").onclick = function () {
             unityInstance.SetFullscreen(1);
           };
         }).catch(function (message) {
+          startButton.textContent = "불러오기 실패";
           unityShowBanner(message, "error");
         });
       };
       document.body.appendChild(script);
+
+      startButton.addEventListener("click", function () {
+        if (!unityInstance) return;
+        titleOverlay.classList.add("is-hidden");
+        titleOverlay.setAttribute("aria-hidden", "true");
+        canvas.focus();
+        try {
+          unityInstance.SendMessage("Game Manager", "StartGame");
+        } catch (error) {
+          console.warn("게임 자동 시작 메시지를 전달하지 못했습니다.", error);
+        }
+      });
     </script>
   </body>
 </html>
